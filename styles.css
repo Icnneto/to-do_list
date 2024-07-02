@@ -1,0 +1,146 @@
+:root {
+    --color-dark-grey: #262626;
+    --color-grey: #A1A1A6;
+    --color-ligth-grey: #D9D9D9;
+    --color-blue: #394759;
+    --color-white: #F2F0F1;
+    --font-main: "Roboto Mono", monospace;
+}
+
+body {
+    background-color: var(--color-white);
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    font-family: var(--font-main);
+}
+
+.board {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    width: 20%;
+    background-color: var(--color-ligth-grey);
+    border-radius: 0.5rem;
+    overflow: auto;
+
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.25);
+}
+
+.board__lane {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.board__lane-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-blue);
+    padding-bottom: 1rem;
+}
+
+#form {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+
+}
+
+#form__input{
+    border: none;
+    background-color: var(--color-white);
+    color: var(--color-dark-grey);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    overflow-wrap: break-word;
+
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.25);
+    
+}
+
+#form__input:hover{
+    border: solid var(--color-blue) 0.01rem;
+    
+}
+
+.form__add-button {
+    border: none;
+    background-color: var(--color-white);
+    color: var(--color-grey);
+    padding: 0.75rem 0.5rem;
+    border-radius: 0.5rem;
+
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.25);
+}
+
+.form__add-button:hover {
+    background-color: var(--color-grey);
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.task {
+    display: grid;
+    grid-template-columns: 90% 20%;
+    align-items: center;
+    background-color: var(--color-white);
+    margin: 0.75rem 0;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    overflow-wrap:break-word;
+
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.25);
+}
+
+.task__content {
+    color: var(--color-blue);
+    font-size: 0.85rem;
+}
+
+.task__delete-button {
+    background-color: transparent;
+    border: none;
+    position: relative;
+}
+
+.task__delete-button .task__delete-img-red {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.task__delete-button:hover .task__delete-img-red {
+    visibility: visible;
+    opacity: 1;
+}
+
+img {
+    width: 100%;
+    text-align: center;
+}
+
+
+@media screen and (max-width: 480px){
+    .board {
+        width: 60%;
+    }
+
+    #form__input{
+        padding: 0.75rem 0.55rem;
+        
+    }
+
+    .form__add-button {
+        padding: 0.75rem 0.6rem;
+        border-radius: 0.5rem;
+    }
+}
+
