@@ -87,7 +87,7 @@ main {
 
 .task {
     display: grid;
-    grid-template-columns: 90% 20%;
+    grid-template-columns: 70% 20% 20%;
     align-items: center;
     background-color: var(--color-white);
     margin: 0.75rem 0;
@@ -101,6 +101,35 @@ main {
 .task__content {
     color: var(--color-blue);
     font-size: 0.85rem;
+    text-decoration: unset;
+}
+
+.task__content-lineThrough {
+    color: var(--color-blue);
+    font-size: 0.85rem;
+    text-decoration: line-through;
+}
+
+.task__strike-button {
+    background-color: transparent;
+    border: none;
+    position: relative;
+}
+
+.task__strike-button .task__strike_on-img {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+
+.task__strike-button:hover .task__strike_on-img {
+    visibility: visible;
+    opacity: 1;
+    background-color: var(--color-white);
+
 }
 
 .task__delete-button {
@@ -115,6 +144,7 @@ main {
     position: absolute;
     top: 0;
     left: 0;
+    
 }
 
 .task__delete-button:hover .task__delete-img-red {
@@ -124,7 +154,6 @@ main {
 
 img {
     width: 100%;
-    text-align: center;
 }
 
 

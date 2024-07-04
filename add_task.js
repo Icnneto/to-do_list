@@ -6,7 +6,9 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
     const newDiv = document.createElement('div');
     newDiv.classList.add('task')
-
+    newDiv.setAttribute('draggable', 'true');
+    newDiv.setAttribute('id', 'task-' + Date.now());
+    
     // adicionar o texto do input na div
     const text = inputForm.value;
     
@@ -20,6 +22,28 @@ form.addEventListener('submit', (e) => {
 
     newDiv.appendChild(newTask);
 
+    // adicionar o botão de tachar
+    const newStrikeButton = document.createElement('button');
+    newStrikeButton.classList.add('task__strike-button');
+    newStrikeButton.onclick = strikeLineTask;
+
+    // adicionando a imagem
+    const imgStrikeButtonOff = document.createElement('img');
+    imgStrikeButtonOff.src = 'assets/tachado_off.svg';
+    imgStrikeButtonOff.classList.add('task__strike_off-img');
+    
+    // adicionando a imagem do hover
+    const imgStrikeButtonOn = document.createElement('img');
+    imgStrikeButtonOn.src = 'assets/tachado_on.svg';
+    imgStrikeButtonOn.classList.add('task__strike_on-img');
+
+    // integrando imagens no botão
+    newStrikeButton.appendChild(imgStrikeButtonOff);
+    newStrikeButton.appendChild(imgStrikeButtonOn);
+
+    // integrando botão a div
+    newDiv.appendChild(newStrikeButton);
+
     // adicionar o botão de deletar
     const newButton = document.createElement('button');
     newButton.classList.add('task__delete-button');
@@ -29,6 +53,7 @@ form.addEventListener('submit', (e) => {
     const imgButton = document.createElement('img');
     imgButton.src = 'assets/grey_delete.svg';
     imgButton.classList.add('task__delete-img');
+
     // adicionando a imagem do hover
     const imgButtonHover = document.createElement('img');
     imgButtonHover.src = 'assets/red_delete_hover.svg';
@@ -47,6 +72,31 @@ form.addEventListener('submit', (e) => {
 
 
 function deleteTask(e) {
-   const div = e.target.closest('.task');
-   div.remove();
+    const div = e.target.closest('.task');
+   
+    if (confirm('Are you sure?')) {
+        div.remove();
+    }
+};
+
+
+let enable = true;
+
+function strikeLineTask(e) {
+    const task = e.target.closest('.task');
+    const text = task.firstChild;
+    console.log(enable);
+
+    if (!enable) {
+        text.classList.add('.task__content');
+        text.classList.remove('task__content-lineThrough');
+        enable = true;  
+        console.log(enable);
+    } else {
+        text.classList.remove('.task__content');
+        text.classList.add('task__content-lineThrough');
+        enable = false; 
+        console.log(enable); 
+    };
+
 };
