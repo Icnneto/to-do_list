@@ -1,8 +1,15 @@
 const form = document.getElementById('form');
 const inputForm = document.getElementById('form__input');
 const boardLane = document.getElementById('board__lane');
+let StrikeLineEnable = true;
+let memoryArr = [];
 
 form.addEventListener('submit', (e) => {
+    createDivTask(e);
+    inputForm.value = '';
+});
+
+function createDivTask(e) {
     e.preventDefault();
     const newDiv = document.createElement('div');
     newDiv.classList.add('task')
@@ -67,36 +74,35 @@ form.addEventListener('submit', (e) => {
     newDiv.appendChild(newButton);
 
     boardLane.appendChild(newDiv);
-    inputForm.value = '';
-});
-
+    console.log(newDiv.id);
+    memoryArr.push(newDiv);
+    console.log(memoryArr);
+}
 
 function deleteTask(e) {
     const div = e.target.closest('.task');
    
     if (confirm('Are you sure?')) {
         div.remove();
+        const indexRemove = memoryArr.indexOf(div);
+        memoryArr.splice(indexRemove, 1);
     }
+    console.log(memoryArr);
 };
 
-
-let enable = true;
 
 function strikeLineTask(e) {
     const task = e.target.closest('.task');
     const text = task.firstChild;
-    console.log(enable);
 
-    if (!enable) {
+    if (!StrikeLineEnable) {
         text.classList.add('.task__content');
         text.classList.remove('task__content-lineThrough');
-        enable = true;  
-        console.log(enable);
+        StrikeLineEnable = true;  
     } else {
         text.classList.remove('.task__content');
         text.classList.add('task__content-lineThrough');
-        enable = false; 
-        console.log(enable); 
+        StrikeLineEnable = false; 
     };
 
 };
