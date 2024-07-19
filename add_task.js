@@ -5,30 +5,19 @@ let StrikeLineEnable = true;
 
 let taskList = localStorage.getItem('newTask') ? JSON.parse(localStorage.getItem('newTask')): [];
 
-// taskList.forEach(element => {
-// });
-
-form.addEventListener('submit', (e) => {
-    createDivTask(e);
-    inputForm.value = '';
-});
-
-function createDivTask(e) {
-    e.preventDefault();
+function createTaskElement(task) {
+    
     const newDiv = document.createElement('div');
     newDiv.classList.add('task')
     newDiv.setAttribute('draggable', 'true');
-    newDiv.setAttribute('id', 'task-' + Date.now());
+    newDiv.setAttribute('id', task.id);
     
-    const text = inputForm.value;
-    
-    if (!text){
-        return;
-    }
-
     const newTask = document.createElement('p');
     newTask.classList.add('task__content');
-    newTask.innerText = text;
+    if (task.striked) {
+        newTask.classList.add('task__content-lineThrough');
+    }
+    newTask.innerText = task.text;
     newDiv.appendChild(newTask);
 
     const newStrikeButton = document.createElement('button');
@@ -65,18 +54,36 @@ function createDivTask(e) {
     newDiv.appendChild(newButton);
 
     boardLane.appendChild(newDiv);
-
-    const tasks = {
-        id: newDiv.id,
-        text: text
-    }
-
-    taskList.push(tasks);
-    localStorage.setItem('newTask', JSON.stringify(taskList));
-    console.log(taskList);
-
 }
 
+taskList.forEach(task => {
+    createTaskElement(task);
+});
+
+form.addEventListener('submit', (e) => {
+    createDivTask(e);
+    inputForm.value = '';
+});
+
+function createDivTask(e) {
+    e.preventDefault();
+    const text = inputForm.value;
+    
+    if (!text) {
+        return;
+    }
+
+    const task = {
+        id: 'task-' + Date.now(),
+        text: text,
+        striked: false
+    };
+
+    createTaskElement(task);
+
+    taskList.push(task);
+    localStorage.setItem('newTask', JSON.stringify(taskList));
+}
 
 function deleteTask(e) {
     const div = e.target.closest('.task');
@@ -85,27 +92,29 @@ function deleteTask(e) {
     if (confirm('Are you sure?')) {
         div.remove();
 
-        const indexRemove = taskList.indexOf(taskList.find((elementId) => elementId.id === elementToRemove));
-        console.log(indexRemove);
+        const indexRemove = taskList.indexOf(taskList.find(task => task.id === elementToRemove));
         taskList.splice(indexRemove, 1);
 
         localStorage.setItem('newTask', JSON.stringify(taskList));
     }
-    console.log(taskList);
 };
 
-
 function strikeLineTask(e) {
-    const task = e.target.closest('.task');
-    const text = task.firstChild;
+    const taskElement = e.target.closest('.task');
+    const taskId = taskElement.id;
+    const taskIndex = taskList.findIndex(task => task.id === taskId);
+    const task = taskList[taskIndex];
 
-    if (!StrikeLineEnable) {
-        text.classList.add('.task__content');
-        text.classList.remove('task__content-lineThrough');
-        StrikeLineEnable = true;  
+    const textElement = taskElement.querySelector('.task__content');
+
+    if (task.striked) {
+        textElement.classList.remove('task__content-lineThrough');
+        task.striked = false;
     } else {
-        text.classList.remove('.task__content');
-        text.classList.add('task__content-lineThrough');
-        StrikeLineEnable = false; 
-    };
+        textElement.classList.add('task__content-lineThrough');
+        task.striked = true;
+    }
+
+    taskList[taskIndex] = task;
+    localStorage.setItem('newTask', JSON.stringify(taskList));
 };
