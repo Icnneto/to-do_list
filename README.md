@@ -44,6 +44,20 @@ While working on this project, I encountered several knowledge barriers. As a re
       </li>
     </ul>
   </li>
+  <li>
+    <p>Storage in localStorage </p>
+    <ul>
+      <li>
+        <p>Implementing localStorage using localStorage.setItem to save data from the user.</p>
+      </li>
+       <li>
+        <p>Retrieving Data stored in localStorage to reflect changes in the application's state..</p>
+      </li>
+     <li>
+      <p>Maintaining Application State persistent between page reloads, ensuring that user data is not lost.</p>
+     </li>
+    </ul>
+  </li>
 </ul>
 <h2>Get in Touch</h2>
 <a href="https://linkedin.com/in/israel-nunes-825968144" target="_blank"><img loading="lazy" src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a><br>
