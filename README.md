@@ -44,6 +44,14 @@ While working on this project, I encountered several knowledge barriers. As a re
       </li>
     </ul>
   </li>
+  <li>
+    <p>LocalStorage for Data Persistence:</p>
+     <ul>
+      <li>
+        <p> Implementing LocalStorage to store and retrieve tasks, learning how to use localStorage.setItem() and localStorage.getItem(). This ensured that the tasks remained available even after closing or refreshing the browser, providing data persistence for the application</p>
+      </li>
+    </ul>
+  </li>
 </ul>
 <h2>Get in Touch</h2>
 <a href="https://linkedin.com/in/israel-nunes-825968144" target="_blank"><img loading="lazy" src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a><br>
